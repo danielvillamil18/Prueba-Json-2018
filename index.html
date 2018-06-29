@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Proyecto prueba json">
+    <meta name="author" content="Daniel Villamil">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="">
+    <title>Prueba - JSON</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/codigo.css??v=1.0.1" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <section id="wrapper">
+        <div class="login-register">
+            <div class="login-box card">
+                <div class="card-body">
+                    <a href="javascript:void(0)" class="text-center db">
+                      <center><img class="img-logo" src="assets/images/u-1.png" alt="Inicio" width="150"/></center><br/></a>
+                        <h3 class="box-title m-b-20" align="center">Digite un número del 1 al 500</h3>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" id="myInput" name="myInput" type="number" placeholder="Digite el número" required="true" min="1" max="500"> </div>
+                        </div>
+                        <div class="form-group text-center m-t-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" onclick="checkCodigo()">Enviar</button>
+                            </div>
+                            <br>
+                            <p id="demo"></p>
+                            <p id="id"></p>
+                            <p id="name"></p>
+                            <p id="email"></p>
+                            <p id="body"></p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+      function checkCodigo() {
+        var text = "";
+        var numCodigo = document.getElementById("myInput").value;
+        if (numCodigo >= 1 && numCodigo <= 500) {
+            $.getJSON( "https://jsonplaceholder.typicode.com/comments/"+numCodigo+"", function( data ) {
+                //console.log(data);
+                document.getElementById("id").innerHTML = "<h3>El número ingresado es:</h3>" + data.id;
+                document.getElementById("name").innerHTML = "<h3>El nombre es:</h3>" + data.name;
+                document.getElementById("email").innerHTML = "<h3>El correo es:</h3>" + data.email;
+                document.getElementById("body").innerHTML = "<h3>El cuerpo es:</h3>" + data.body;
+
+            });
+        } else{
+          text = "Señor usuario por favor verificar el número ingresado";
+        }
+        document.getElementById("demo").innerHTML = text;
+      }
+    </script>
+</body>
+</html>
